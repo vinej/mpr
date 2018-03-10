@@ -1,0 +1,30 @@
+import axios from 'axios'
+
+class {
+  onCreate() {
+    this.state = { count:0, companies:[] };
+  }
+
+  onMount() {
+    this.get()
+  }
+
+  get() {
+      this.state.count++;
+      axios.get('http://localhost:8000/api/companies')
+      .then(response => this.state.companies = response.data)
+      .catch(error => { console.log(error); });
+  }
+}
+
+<div.count>
+  ${state.count}
+</div>
+<div>
+  <ul>
+  <for (cie in state.companies)>
+    <li>${cie.code}</li>
+  </for>
+  </ul>
+</div>
+<button on-click('get')>Get data</button>
